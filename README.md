@@ -76,7 +76,7 @@ src. https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.htm
 
 ### Server, Routes and Plugins
 
-Server, routes and plugins can be considered as "plumbery-code" that exposes the API to the external world, via an instance of Hapi.js server.
+Server, routes and plugins can be considered as "plumbery-code" that exposes the API to the external world, via an instance of Express server.
 
 The role of the server is to intercept the HTTP request and match the corresponding route.
 
