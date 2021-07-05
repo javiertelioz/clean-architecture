@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import Logger from '../../../infrastructure/Logger';
+import Logger from '../../../infrastructure/logger';
 import HttpException from '../exceptions/HttpException';
 
 function errorMiddleware(error: HttpException, request: Request, response: Response, next: NextFunction) {

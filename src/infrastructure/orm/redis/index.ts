@@ -2,7 +2,7 @@ import redis, { RedisClient, RedisError } from 'redis';
 
 import redisConfig from './config';
 
-import Logger from '../../Logger';
+import Logger from '../../logger';
 
 /**
  * Class RedisAdapter
