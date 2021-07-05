@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 import Server from '../src/interfaces/web/Server';
 
-import Logger from '../src/infrastructure/Logger';
+import Logger from '../src/infrastructure/logger';
 // import RedisAdapter from '../src/infrastructure/orm/redis';
 import MongooseAdapter from '../src/infrastructure/orm/mongoose';
 // import SequelizeAdapter from '../src/infrastructure/orm/sequelize';
