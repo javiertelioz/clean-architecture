@@ -2,10 +2,10 @@ import httpStatus from 'http-status';
 import { Request, Response, NextFunction } from 'express';
 
 import HttpException from '../exceptions/HttpException';
+import UserSerializer from '../serializers/user/UserSerializer';
 
 import BcryptManager from '../../../infrastructure/security/BcryptManager';
 
-import UserSerializer from '../serializers/user/UserSerializer';
 import { Pagination, Paginate } from '../Pagination';
 
 import GetUser from '../../../application/use_cases/user/GetUser';
@@ -14,8 +14,8 @@ import GetAllUsers from '../../../application/use_cases/user/GetAllUsers';
 import RemoveUser from '../../../application/use_cases/user/RemoveUser';
 import UpdateUser from '../../../application/use_cases/user/UpdateUser';
 
-// import UserRepositorySQL from "../../../infrastructure/repositories/user/UserRepositorySQL";
-import UserRepositoryMongo from '../../../infrastructure/repositories/user/UserRepositoryMongo';
+import UserRepositoryMongo from '../../../infrastructure/repositories/user/UserRepositorySQL';
+// import UserRepositoryMongo from '../../../infrastructure/repositories/user/UserRepositoryMongo';
 
 export default class UserController {
   async createUser(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -27,7 +27,7 @@ export default class UserController {
 
       return res.status(httpStatus.CREATED).send(userSerializer.singleSerialize(user));
     } catch (error) {
-      next(new HttpException(httpStatus.INTERNAL_SERVER_ERROR, error.message));
+      next(new HttpException(httpStatus.CONFLICT, error.message));
     }
   }
 

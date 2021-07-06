@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-import sequelizeConfig from './config';
+import sequelizeConfig from './config/index.js';
 
 /**
  * Class SequelizeAdapter

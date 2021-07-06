@@ -1,22 +1,20 @@
-import SequelizeAdapter from '../../../infrastructure/orm/sequelize';
+import { UserSequelize } from '../../../infrastructure/orm/sequelize/models/User';
 
 import { User, IUser } from '../../../domain/entities/User/index';
 import { Collection, Pagination } from '../../../domain/Repository/interfaces/IRead';
 import { IUserRepository } from '../../../domain/Repository/user/IUserRepository';
 
 export default class UserRepositorySQL extends IUserRepository {
-  private db = null;
   private model = null;
 
   constructor() {
     super();
-    this.db = SequelizeAdapter.instance.sequelize;
-    this.model = this.db.model('user');
+    this.model = UserSequelize;
   }
 
   async create(user: IUser): Promise<User> {
-    const { firstname, lastname, email, password, gender } = user;
-    const seqUser = await this.model.create({ firstname, lastname, email, password, gender });
+    const { firstname, lastname, email, password, role, gender } = user;
+    const seqUser = await this.model.create({ firstname, lastname, email, password, role, gender });
 
     await seqUser.save();
 
@@ -92,7 +90,11 @@ export default class UserRepositorySQL extends IUserRepository {
   }
 
   async getByEmail(email: string): Promise<User | boolean> {
-    const seqUser = await this.model.find({ email });
+    const seqUser = await this.model.findOne({
+      where: {
+        email
+      }
+    });
 
     if (!seqUser) {
       return false;

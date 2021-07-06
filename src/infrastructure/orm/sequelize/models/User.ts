@@ -1,61 +1,75 @@
-import { Model, STRING, DATEONLY, INTEGER } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 
 import SequelizeAdapter from '../index';
 
 const { sequelize } = SequelizeAdapter.instance;
 
-export class User extends Model {}
+export class UserSequelize extends Model {}
 
-export class UserModel {
-  id: string;
-  name: string;
+export class UserSequelizeModel {
+  id?: string;
+  firstname: string;
+  lastname: string;
   password: string;
-  createdAt: Date;
-  updatedAt: Date;
+  email: string;
+  role: string;
+  gender?: string;
+  phone?: string;
+  picture?: string;
+  dob?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-User.init(
+UserSequelize.init(
   {
     id: {
       primaryKey: true,
       autoIncrement: true,
-      type: INTEGER
+      type: DataTypes.INTEGER
     },
     firstname: {
       allowNull: false,
-      type: STRING(80)
+      type: DataTypes.STRING(80)
     },
     lastname: {
       allowNull: false,
-      type: STRING(80)
+      type: DataTypes.STRING(80)
     },
     gender: {
       allowNull: true,
-      type: STRING(10)
+      type: DataTypes.STRING(10)
     },
     phone: {
       allowNull: true,
-      type: STRING(16)
+      type: DataTypes.STRING(16)
     },
     picture: {
       allowNull: true,
-      type: STRING()
+      type: DataTypes.STRING()
     },
     dob: {
       allowNull: true,
-      type: DATEONLY()
+      type: DataTypes.DATEONLY()
     },
     email: {
       allowNull: false,
-      type: STRING(50)
+      type: DataTypes.STRING(50)
+    },
+    role: {
+      allowNull: false,
+      type: DataTypes.STRING(50)
     },
     password: {
       allowNull: false,
-      type: STRING(60)
+      type: DataTypes.STRING(60)
     }
   },
   {
-    modelName: 'User',
-    sequelize
+    sequelize,
+    paranoid: true,
+    underscored: true,
+    modelName: 'user',
+    comment: 'User Table'
   }
 );
