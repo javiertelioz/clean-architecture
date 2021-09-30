@@ -1,13 +1,17 @@
 {
   "verbose": false,
+  "restartable": "rs",
   "ignore": [
-    "**/*.test.ts",
-    "**/*.spec.ts",
     ".git",
-    "node_modules"
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.spec.ts"
   ],
+  "execMap": {
+    "ts": "node --require ts-node/register"
+  },
   "watch": [
-    "./**/*.{js,ts}"
+    "src/**/*"
   ],
   "ext": "ts",
   "exec": "ts-node src/index.ts"

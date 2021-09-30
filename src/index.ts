@@ -3,9 +3,10 @@ import dotenv from 'dotenv';
 import Server from './interfaces/web/Server';
 
 import Logger from './infrastructure/logger';
+
 // import RedisAdapter from './infrastructure/orm/redis';
 import MongooseAdapter from './infrastructure/orm/mongoose';
-// import SequelizeAdapter from './infrastructure/orm/sequelize';
+import SequelizeAdapter from './infrastructure/orm/sequelize';
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ const server = Server.instance;
 
 // const redis = RedisAdapter.instance;
 const mongoose = MongooseAdapter.instance;
-// const sequelize = SequelizeAdapter.instance;
+const sequelize = SequelizeAdapter.instance;
 
 /**
  * Start Server
@@ -26,7 +27,7 @@ const bootstrap = async () => {
 
   try {
     // redis.run();
-    // await sequelize.run();
+    await sequelize.run();
     await mongoose.run();
 
     server.start();
